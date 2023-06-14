@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-	<style type="text/css">
-		/* Prevent copy paste for all elements except text fields */
-		*  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
-		input, textarea  { -webkit-user-select:text; }
-		body { background-color:black; color:white }
+    <meta charset="UTF-8"/>
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #000000;
+            overflow: hidden;
+		}
+        #canvasArea {
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+        }
+
         
 	</style>
-	<script src='cordova.js'></script>
+    <!-- Libs and GDJS core files : -->
 		<script src="libs/jshashtable.js" crossorigin="anonymous"></script>
 	<script src="logger.js" crossorigin="anonymous"></script>
 	<script src="gd.js" crossorigin="anonymous"></script>
@@ -112,34 +126,30 @@
 	<script src="code0.js" crossorigin="anonymous"></script>
 	<script src="data.js" crossorigin="anonymous"></script>
 
-	<script type="text/javascript">
-		var onDeviceReady=function(){
-	        //Initialization
-			if (typeof navigator !== "undefined" && navigator.splashscreen && navigator.splashscreen.hide)
-				navigator.splashscreen.hide();
 
-				//Initialization
-				var game = new gdjs.RuntimeGame(gdjs.projectData, {});
-
-				//Create a renderer
-				var canvasArea = document.getElementById("canvasArea");
-				game.getRenderer().createStandardCanvas(canvasArea);
-
-				//Bind keyboards/mouse/touch events
-				game.getRenderer().bindStandardEvents(game.getInputManager(), window, document);
-
-				//Load all assets and start the game
-				game.loadAllAssets(function() {
-						game.startGameLoop();
-				});
-		};
-		document.addEventListener("deviceready", onDeviceReady, false);
-	</script>
 </head>
 <body>
-    <div id="canvasArea"></div>
 
     
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" data-cf-beacon='{"rayId":"7d7607e1efa3af57","token":"c18f780cd91744be917cacf5071242dd","version":"2023.4.0","si":100}' crossorigin="anonymous"></script>
+	<script>
+
+    (function() {
+        //Initialization
+        var game = new gdjs.RuntimeGame(gdjs.projectData, {});
+
+        //Create a renderer
+        game.getRenderer().createStandardCanvas(document.body);
+
+        //Bind keyboards/mouse/touch events
+        game.getRenderer().bindStandardEvents(game.getInputManager(), window, document);
+
+        //Load all assets and start the game
+        game.loadAllAssets(function() {
+            game.startGameLoop();
+        });
+    })();
+
+	</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" data-cf-beacon='{"rayId":"7d76405e8e58af51","token":"c18f780cd91744be917cacf5071242dd","version":"2023.4.0","si":100}' crossorigin="anonymous"></script>
 </body>
 </html>
